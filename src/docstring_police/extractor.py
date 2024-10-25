@@ -129,3 +129,12 @@ if __name__ == "__main__":
         print(result)
         if i == 2:
             break
+
+
+# TODO: Find a way to use gpt-3.5-turbo-16k2
+# labels: enhancement, help wanted
+
+# FIXME: gpt-3.5-turbo-16k is not available2
+# labels: 
+
+

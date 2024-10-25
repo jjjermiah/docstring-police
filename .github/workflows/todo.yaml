@@ -20,21 +20,21 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Automatically added GitHub issue links to TODOs"
-          title: "Automatically added GitHub issue links to TODOs"
-          body: "Automatically added GitHub issue links to TODOs"
-          branch: "auto-todo-to-issue"
+      # - name: Create Pull Request
+      #   id: cpr
+      #   uses: peter-evans/create-pull-request@v7
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     commit-message: "Automatically added GitHub issue links to TODOs"
+      #     title: "Automatically added GitHub issue links to TODOs"
+      #     body: "Automatically added GitHub issue links to TODOs"
+      #     branch: "auto-todo-to-issue"
 
-      - name: Check outputs
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+      # - name: Check outputs
+      #   if: ${{ steps.cpr.outputs.pull-request-number }}
+      #   run: |
+      #     echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+      #     echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
 
       # - name: Commit and Push Changes
       #   run: |
