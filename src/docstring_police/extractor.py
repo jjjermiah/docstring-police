@@ -85,9 +85,7 @@ class CodeBlockExtractor:
     @property
     def classes(self) -> List[_ast.ClassDef]:
         """The list of classes extracted from the Python file."""
-        return [
-            node for node in self._code_blocks if isinstance(node, _ast.ClassDef)
-        ]
+        return [node for node in self._code_blocks if isinstance(node, _ast.ClassDef)]
 
     def _extract_functions_and_methods(
         self, code_block_name: Optional[str] = None
@@ -112,9 +110,13 @@ class CodeBlockExtractor:
     @staticmethod
     def get_docstring(node: _ast.AST) -> str | None:
         """Helper method to extract the docstring from a given node."""
-        if not isinstance(node, (_ast.AsyncFunctionDef, _ast.FunctionDef, _ast.ClassDef)):
-            raise TypeError(f"Expected a function or class definition, got {type(node)}")
-        
+        if not isinstance(
+            node, (_ast.AsyncFunctionDef, _ast.FunctionDef, _ast.ClassDef)
+        ):
+            raise TypeError(
+                f"Expected a function or class definition, got {type(node)}"
+            )
+
         return _ast.get_docstring(node, clean=True)
 
 
