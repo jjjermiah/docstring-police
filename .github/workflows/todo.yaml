@@ -11,6 +11,7 @@ jobs:
       - name: "TODO to Issue"
         uses: "alstr/todo-to-issue-action@v5"
         with:
+          LANGUAGES: "todo-languages.json"
           INSERT_ISSUE_URLS: "true"
           CLOSE_ISSUES: "true"
           IDENTIFIERS: '[{"name": "TODO", "labels": ["help-wanted"]}, {"name": "FIXME", "labels": ["bug", "fixme"]}]'
