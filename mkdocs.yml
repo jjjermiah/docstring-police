@@ -1,6 +1,7 @@
 site_name: "PLAYGROUND"
 site_url: https://prefix-dev.github.io/pixi
 
+
 theme:
   name: material
   custom_dir: docs/overrides
