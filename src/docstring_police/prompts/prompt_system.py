@@ -147,3 +147,5 @@ if __name__ == "__main__":
     print(f"Tokens in DETAILED_NUMPYDOC: {doc_tokens}")
     print(f"Tokens in PROMPT_SYSTEM: {prompt_tokens}")
     
+    # TODO: pytest1
+    # TODO:: pytest2
