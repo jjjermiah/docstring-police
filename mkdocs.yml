@@ -11,6 +11,7 @@ theme:
     text: Red Hat Text
     code: JetBrains Mono
 
+
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
