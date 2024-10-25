@@ -1,0 +1,97 @@
+[project]
+authors = [{ name = "Jermiah Joseph", email = "jermiahjoseph98@gmail.com" }]
+dependencies = ["openai>=1.52.2,<2", "click>=8.1.7,<9", "tiktoken>=0.8.0,<0.9", "python-dotenv>=1.0.1,<2"]
+description = "Add a short description here"
+name = "docstring-police"
+requires-python = ">= 3.11"
+version = "0.1.0"
+
+[project.optional-dependencies]
+dev = []
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64"]
+
+[tool.pixi.pypi-dependencies]
+docstring_police = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+# no conda packages in default environment
+
+[tool.pixi.feature.dev.dependencies]
+rich = "*"
+ipython = ">=8.28.0,<9"
+pip = ">=24.2,<25"
+
+[tool.pixi.feature.dev.pypi-dependencies]
+# dev = ["ipykernel>=6.29.5,<7", "jupyter>=1.1.1,<2"]
+ipykernel = ">=6.29.5,<7"
+jupyter = ">=1.1.1,<2"
+
+[tool.pixi.environments]
+dev = { features = ["test", "style", "docs", "dev"], solve-group = "default" }
+# publish = { features = ["build", "release"], solve-group = "default" }
+py311 = ["py311", "test"]
+py312 = ["py312", "test"]
+
+############################################## python ###############################################
+
+[tool.pixi.feature.py311.dependencies]
+python = "3.11.*"
+[tool.pixi.feature.py312.dependencies]
+python = "3.12.*"
+
+############################################## TEST ################################################
+
+[tool.pixi.feature.test.dependencies]
+pytest = "*"
+pytest-cov = "*"
+pytest-xdist = "*"
+
+[tool.pixi.feature.test.tasks.test]
+cmd = [
+  "pytest",
+  "--numprocesses=auto",
+  "-s",
+  "--verbose",
+  "--cov=dsp",
+  "--cov-report=xml:coverage-report/coverage.xml",
+  "--cov-config=config/coverage.toml",
+]
+inputs = ["src", "tests", "config/coverage.toml"]
+outputs = ["coverage-report/coverage.xml"]
+description = "Run pytest (Note: run `coverage` task to do both)"
+
+[tool.pixi.feature.test.tasks.coverage]
+cmd = "coverage report --rcfile=config/coverage.toml"
+inputs = ["coverage-report/coverage.xml", "config/coverage.toml"]
+depends-on = ["test"]
+description = "Run pytest and generate coverage report"
+
+############################################## DOCS ################################################
+[tool.pixi.feature.docs.dependencies]
+mkdocs = "*"
+
+############################################## STYLE ###############################################
+# See config/ruff.toml for the configuration
+[tool.pixi.feature.style.dependencies]
+ruff = ">=0.4.4"
+pre-commit = ">=3.7.1,<3.8"
+
+[tool.pixi.feature.style.tasks]
+[tool.pixi.feature.style.tasks.lint]
+cmd = "ruff check  --config=config/ruff.toml"
+inputs = ["src", "config/ruff.toml"]
+description = "Run ruff linter"
+
+[tool.pixi.feature.style.tasks.format]
+cmd = "ruff format --config=config/ruff.toml"
+inputs = ["src", "config/ruff.toml"]
+description = "Run ruff formatter, use `--diff` to see changes only"
