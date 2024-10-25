@@ -10,7 +10,6 @@ jobs:
         with:
           INSERT_ISSUE_URLS: "true"
           CLOSE_ISSUES: "true"
-          LANGUAGES: "python,markdown"
       - name: Set Git user
         run: |
           git config --global user.name "github-actions[bot]"
